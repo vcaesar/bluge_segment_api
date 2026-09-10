@@ -9,3 +9,7 @@
 .DS_Store
 *.test
 tags
+
+v0
+.v0
+.codg

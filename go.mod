@@ -1,4 +1,4 @@
-module github.com/blugelabs/bluge_segment_api
+module github.com/vcaesar/bluge_segment_api
 
 go 1.27.1
 
