@@ -16,7 +16,6 @@ package segment
 
 import (
 	"bytes"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"testing"
@@ -69,10 +68,7 @@ func TestData(t *testing.T) {
 		})
 	}
 
-	tmpDir, err := ioutil.TempDir("", "data-test")
-	if err != nil {
-		t.Fatal(err)
-	}
+	tmpDir := t.TempDir()
 
 	// repeat using files
 	for _, testCase := range testCases {
@@ -86,7 +82,7 @@ func TestData(t *testing.T) {
 func testDataFile(t *testing.T, tmpDir string, testCase dataTest) {
 	filePath := filepath.Join(tmpDir, testCase.name)
 
-	err := ioutil.WriteFile(filePath, testCase.input, 0600)
+	err := os.WriteFile(filePath, testCase.input, 0600)
 	if err != nil {
 		t.Fatalf("error creating tmp file: %v", err)
 	}

@@ -18,7 +18,7 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/RoaringBitmap/roaring"
+	"github.com/RoaringBitmap/roaring/v2"
 )
 
 var ErrClosed = fmt.Errorf("index closed")
