@@ -1,16 +1,28 @@
+name: Lint
+
 on:
   push:
     branches:
       - master
   pull_request:
-name: Lint
+
+permissions:
+  contents: read
+
 jobs:
   golangci:
     name: lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: golangci-lint
-        uses: golangci/golangci-lint-action@v2
+      - name: Checkout code
+        uses: actions/checkout@v7
+      - name: Install Go
+        uses: actions/setup-go@v7
         with:
-          version: v1.30
+          go-version-file: go.mod
+      - name: Validate workflows
+        run: go run github.com/rhysd/actionlint/cmd/actionlint@v1.7.12
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v9
+        with:
+          version: v2.13.2
