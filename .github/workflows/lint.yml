@@ -26,3 +26,6 @@ jobs:
         uses: golangci/golangci-lint-action@v9
         with:
           version: v2.13.2
+      - name: Validate linter configuration
+        if: ${{ !cancelled() }}
+        run: golangci-lint config verify --config .golangci.yml
