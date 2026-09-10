@@ -29,17 +29,22 @@ type dataTest struct {
 }
 
 func TestData(t *testing.T) {
+	const (
+		kila = "kila"
+		mega = "mega"
+	)
+
 	testCases := []dataTest{
 		{
 			name:  "simple",
 			input: []byte("simple"),
 		},
 		{
-			name:  "kila",
-			input: bytes.Repeat([]byte{0}, 1024),
+			name:  kila,
+			input: make([]byte, 1024),
 		},
 		{
-			name:  "mega",
+			name:  mega,
 			input: bytes.Repeat([]byte{'m'}, 1024*1024),
 		},
 		{
@@ -48,13 +53,13 @@ func TestData(t *testing.T) {
 			sliceEnd: 4,
 		},
 		{
-			name:       "kila",
-			input:      bytes.Repeat([]byte{0}, 1024),
+			name:       kila,
+			input:      make([]byte, 1024),
 			sliceStart: 4,
 			sliceEnd:   1024 - 24,
 		},
 		{
-			name:       "mega",
+			name:       mega,
 			input:      bytes.Repeat([]byte{'m'}, 1024*1024),
 			sliceStart: 27,
 			sliceEnd:   (1024 * 1024) - 48,
@@ -106,6 +111,9 @@ func testDataFile(t *testing.T, tmpDir string, testCase dataTest) {
 	}
 	if n != int64(len(testCase.input)) {
 		t.Errorf("write %d bytes, expected: %d", n, len(testCase.input))
+	}
+	if !bytes.Equal(buf.Bytes(), testCase.input) {
+		t.Error("written data does not match input")
 	}
 	err = f.Close()
 	if err != nil {
