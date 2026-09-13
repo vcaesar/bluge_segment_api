@@ -1,6 +1,6 @@
 module github.com/vcaesar/bluge_segment_api
 
-go 1.27.1
+go 1.24.0
 
 require github.com/RoaringBitmap/roaring/v2 v2.27.0
 
