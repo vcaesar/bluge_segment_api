@@ -154,6 +154,17 @@ type DocumentValueReader interface {
 	VisitDocumentValues(number uint64, visitor DocumentValueVisitor) error
 }
 
+// NumericValueVisitor receives the typed value of a numeric doc value field.
+type NumericValueVisitor func(field string, value int64)
+
+// NumericDocumentValueReader is optionally implemented by a
+// DocumentValueReader whose segment stores numeric fields as typed columns.
+// Numeric fields go to numVisitor; all other fields go to visitor as terms.
+type NumericDocumentValueReader interface {
+	DocumentValueReader
+	VisitDocumentNumbers(number uint64, visitor DocumentValueVisitor, numVisitor NumericValueVisitor) error
+}
+
 type DocVisitState interface {
 }
 

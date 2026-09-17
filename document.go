@@ -35,6 +35,14 @@ type Field interface {
 
 type VisitTerm func(FieldTerm)
 
+// NumericField is optionally implemented by a Field whose doc value is a
+// single int64 (numeric, date, geo). Segments may store it as a typed
+// column instead of terms; ok is false when the field is not numeric.
+type NumericField interface {
+	Field
+	NumericValue() (value int64, ok bool)
+}
+
 type FieldTerm interface {
 	Term() []byte
 	Frequency() int
