@@ -2,7 +2,7 @@ module github.com/vcaesar/bluge_segment_api
 
 go 1.25.0
 
-require github.com/RoaringBitmap/roaring/v2 v2.27.0
+require github.com/RoaringBitmap/roaring/v2 v2.30.0
 
 require (
 	github.com/bits-and-blooms/bitset v1.24.4 // indirect
